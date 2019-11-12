@@ -27,7 +27,7 @@ const app = express();
 const mongoUrl = MONGODB_URI;
 mongoose.Promise = bluebird;
 
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true } ).then(
+mongoose.connect(mongoUrl, { useFindAndModify: false, useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true } ).then(
     () => { 
         /** ready to use. The `mongoose.connect()` promise resolves to undefined. */
         console.log("Successfully connected to database");
@@ -61,7 +61,11 @@ app.get("/users", userController.getAllUsers);
  * Sprint routes.
  */
 app.get("/sprints", sprintController.getAllSprints);
-
+app.get("/sprints/:sprintId", sprintController.getSprint);
+app.post("/sprints", sprintController.createSprint);
+app.put("/sprints/:sprintId", sprintController.updateSprint);
+app.delete("/sprints", sprintController.deleteAllSprints);
+app.delete("/sprints/:sprintId", sprintController.deleteSprint);
 
 
 export default app;
