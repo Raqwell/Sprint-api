@@ -2,6 +2,9 @@
 
 import { Response, Request, NextFunction } from "express";
 import { User, UserDocument } from "../models/user";
+/* import mongoose from "mongoose";
+
+const User = mongoose.model("User"); */
 
 export class UserController  {
     constructor() {
@@ -22,6 +25,23 @@ export class UserController  {
                 message: err.message || "Some error occured while retrieving users."
             });
         });
+    }
+
+    public async readProfile(req: any, res: Response): Promise<void> {
+        if(!req.payload._id) {
+            res.status(401).send({
+                "message" : "UnauthorizedError: private profile"
+            });
+        } else {
+            User.findById(req.payload._id)
+            .exec(user => {
+                res.send(user);
+            }).catch(err => {
+                res.status(500).send({
+                    message: err.message || "Some error occured while reading the user profile."
+                });
+            });
+        }
     }
 }
 

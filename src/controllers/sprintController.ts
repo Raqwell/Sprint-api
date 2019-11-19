@@ -15,8 +15,8 @@ export class SprintController {
      */
     public async getAllSprints(req: Request, res: Response): Promise<void> {
         // retrieve current user
-        // find user id in db
-        // get all sprints that match this id
+        // const currentUser = ????
+        // get all sprints that match this email : Sprint.find( userEmail = currentUser.email )
         Sprint.find()
         .then(sprints => {
             res.send(sprints);
@@ -33,7 +33,7 @@ export class SprintController {
      * @param res 
      */
     public async getSprint(req: Request, res: Response): Promise<void> {   
-        // add userId     
+        // add userEmail    
         Sprint.findById(req.params.sprintId)
         .then(sprint => {
             if(!sprint) {
@@ -64,6 +64,7 @@ export class SprintController {
      * @param res 
      */
     public async createSprint(req: Request, res: Response): Promise<void> {
+        // add userEmail
         if(!req.body.description) {
             res.status(400).send({
                 message: "Description of sprint cannot be empty"
@@ -96,7 +97,7 @@ export class SprintController {
      * @param res 
      */
     public async updateSprint(req: Request, res: Response): Promise<void> {
-        // add userId
+        // add userEmail
         Sprint.findByIdAndUpdate(req.params.sprintId, {
             status: req.body.status,
             finish: req.body.finish
@@ -130,6 +131,7 @@ export class SprintController {
      * @param res 
      */
     public async deleteAllSprints(req: Request, res: Response): Promise<void> {
+        //add userEmail
         res.json({allo: "toi"});
     }
 
@@ -139,7 +141,7 @@ export class SprintController {
      * @param res 
      */
     public async deleteSprint(req: Request, res: Response): Promise<void> {
-        // add userId
+        // add userEmail
         Sprint.findByIdAndRemove(req.params.sprintId)
         .then(sprint => {
             if(!sprint) {

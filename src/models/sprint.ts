@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 export type SprintDocument = mongoose.Document & {
-    userId: string;
+    userEmail: string;
     length: number;
     status: number;
     createdAt: Date;
@@ -10,7 +10,7 @@ export type SprintDocument = mongoose.Document & {
 };
 
 const sprintSchema = new mongoose.Schema({
-    userId: { type: String, required: true },
+    userEmail: { type: String, required: true },
     length: { type: Number, required: true },
     status: Number,
     createdAt    : { type: Date, required: true, default: Date.now },
