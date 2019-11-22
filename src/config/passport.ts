@@ -2,7 +2,6 @@ import passport from "passport";
 import mongoose from "mongoose";
 import { Strategy as LocalStrategy } from "passport-local";
 import { User, UserDocument } from "../models/user";
-//const User = mongoose.model("User");
 
 passport.use(new LocalStrategy({
   usernameField: "email"

@@ -10,11 +10,15 @@ const auth = jwt({
     userProperty: "payload"
 });
 
-router.get("/", sprintController.getAllSprints);
-router.get("/:sprintId", sprintController.getSprint);
+//router.get("/", sprintController.getAllSprints);
+router.get("/", sprintController.getAllSprintsByUser);
 router.post("/", sprintController.createSprint);
-router.put("/:sprintId", sprintController.updateSprint);
-router.delete("/", sprintController.deleteAllSprints);
-router.delete("/:sprintId", sprintController.deleteSprint);
+router.delete("/", sprintController.deleteAllSprintsByUser);
+
+router.get("/filteredSprints", sprintController.getFilteredSprints);
+
+router.get("/sprint/:sprintId", sprintController.getSprintById);
+router.put("/sprint/:sprintId", sprintController.updateSprint);
+router.delete("/sprint/:sprintId", sprintController.deleteSprint);
 
 export default router;

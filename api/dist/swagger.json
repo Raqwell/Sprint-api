@@ -1,0 +1,51 @@
+{
+	"basePath": "/api",
+	"consumes": [
+		"application/json"
+	],
+	"definitions": {},
+	"info": {
+		"title": "express-typescript-starter",
+		"version": "0.1.0",
+		"description": "A starting point for Node.js express apps with TypeScript",
+		"license": {
+			"name": "MIT"
+		}
+	},
+	"paths": {
+		"/sprints/message": {
+			"get": {
+				"operationId": "Index",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"schema": {
+							"properties": {
+								"msg": {
+									"type": "string"
+								}
+							},
+							"required": [
+								"msg"
+							],
+							"type": "object"
+						}
+					}
+				},
+				"security": [],
+				"parameters": []
+			}
+		}
+	},
+	"produces": [
+		"application/json"
+	],
+	"swagger": "2.0",
+	"securityDefinitions": {},
+	"schemes": [
+		"http"
+	]
+}

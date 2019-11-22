@@ -12,6 +12,10 @@ import mongoose from "mongoose";
 import bluebird from "bluebird";
 import { MONGODB_URI, HASH_SECRET, SESSION_SECRET } from "./util/secrets";
 import cors from "cors";
+//import * as swaggerUi from "swagger-ui-express";
+//import { RegisterRoutes } from "./config/routes"; // tsoa
+
+//import * as swaggerDocument from "../api/dist/swagger.json";
 
 const MongoStore = mongo(session);
 
@@ -19,9 +23,11 @@ const MongoStore = mongo(session);
 import userRouter from "./routes/user";
 import sprintRouter from "./routes/sprint";
 import authRouter from "./routes/auth";
+import { sprintController } from "./controllers/sprintController";
+const router = express.Router();
 
 // API keys and Passport configuration
-import * as passportConfig from "./config/passport";
+//import * as passportConfig from "./config/passport";
 
 // Create Express server
 const app = express();
@@ -49,16 +55,20 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(passport.initialize());
 
+//Swagger routes
+//RegisterRoutes(app); 
+//app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 
 // User routes
-app.use("/users", userRouter);
+app.use("/api/users", userRouter);
 
 // Sprint routes.
-app.use("/sprints", sprintRouter);
+app.use("/api/sprints", sprintRouter);
 
 // Authentication routes.
 
-app.use("/auth", authRouter);
+app.use("/api/auth", authRouter);
 
 
 // Error handlers

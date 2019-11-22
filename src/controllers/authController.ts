@@ -4,10 +4,7 @@ import { Response, Request, NextFunction } from "express";
 import passport from "passport";
 import mongoose from "mongoose";
 import { ResponseError } from "superagent";
-import { UserDocument } from "../models/user";
-//import { User, UserDocument } from "../models/user";
-
-const User = mongoose.model("User");
+import { User, UserDocument } from "../models/user";
 
 
 export class AuthController {

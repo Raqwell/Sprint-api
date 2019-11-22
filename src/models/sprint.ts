@@ -1,21 +1,52 @@
 import mongoose from "mongoose";
 
+enum SprintStatus {
+    IN_PROGRESS,
+    PAUSED,
+    CANCELLED,
+    COMPLETED
+}
+
+enum DurationUnit {
+    SECOND,
+    MINUTE,
+    HOUR
+}
+
+export type SprintType = {
+    name: string;
+    duration: number;
+    unit: DurationUnit;
+    status: SprintStatus;
+}
+
+export const sprintTypeSchema = new mongoose.Schema({
+    name: String,
+    duration: Number,
+    unit: Number,
+    status: Number
+});
+
 export type SprintDocument = mongoose.Document & {
-    userEmail: string;
-    length: number;
-    status: number;
-    createdAt: Date;
-    finish: Date;
+    sprintType: SprintType;
+    progress: number;
     description: string;
+    user: string;
+    notify: boolean;
+    createdAt: Date;
+    started: Date;
+    finishedAt: Date;
 };
 
 const sprintSchema = new mongoose.Schema({
-    userEmail: { type: String, required: true },
-    length: { type: Number, required: true },
-    status: Number,
-    createdAt    : { type: Date, required: true, default: Date.now },
-    finish: Date,
-    description: { type: String, required: true }
+    sprintType: { type: sprintTypeSchema, required: true },
+    progress: { type: Number, required: true },
+    user: { type: String, required: true },
+    description: { type: String, required: true },
+    notify: Boolean,
+    createdAt : { type: Date, required: true, default: Date.now },
+    startedAt : { type: Date, required: true, default: Date.now },
+    finishedAt: Date,
 });
 
 export const Sprint = mongoose.model<SprintDocument>("Sprint", sprintSchema);
